@@ -2,32 +2,20 @@ import React from 'react'
 import styles from './style';
 
 class CartItem extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            price: 999,
-            title: 'Phone',
-            Qty: 1,
-            img: ''
-        }
-        // this.increaseQuantity = this.increaseQuantity.bind(this);
-        this.testing();
-    }
+    // testing() {
+    //     const promise = new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve('done');
+    //         }, 5000)
+    //     })
+    //     promise.then(() => {
+    //         this.setState({ Qty: this.state.Qty + 10 })
+    //         this.setState({ Qty: this.state.Qty + 10 })
+    //         this.setState({ Qty: this.state.Qty + 10 })
 
-    testing() {
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('done');
-            }, 5000)
-        })
-        promise.then(() => {
-            this.setState({ Qty: this.state.Qty + 10 })
-            this.setState({ Qty: this.state.Qty + 10 })
-            this.setState({ Qty: this.state.Qty + 10 })
-
-            console.log('state:', this.state);
-        })
-    }
+    //         console.log('state:', this.state);
+    //     })
+    // }
 
 
     increaseQuantity = () => {
@@ -61,7 +49,8 @@ class CartItem extends React.Component {
     }
 
     render() {
-        const { price, title, Qty } = this.state;
+        console.log('this.props:', this.props.product);
+        const { price, title, Qty } = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
