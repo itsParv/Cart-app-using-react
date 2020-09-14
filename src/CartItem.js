@@ -1,92 +1,53 @@
-import React from 'react'
-import styles from './style';
+import React from 'react';
 
 class CartItem extends React.Component {
-    // testing() {
-    //     const promise = new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve('done');
-    //         }, 5000)
-    //     })
-    //     promise.then(() => {
-    //         this.setState({ Qty: this.state.Qty + 10 })
-    //         this.setState({ Qty: this.state.Qty + 10 })
-    //         this.setState({ Qty: this.state.Qty + 10 })
-
-    //         console.log('state:', this.state);
-    //     })
-    // }
-
-
-    increaseQuantity = () => {
-        // this.setState({
-        //     Qty: this.state.Qty + 1
-        // })
-        this.setState((prevState) => {
-            return {
-                Qty: prevState.Qty + 1
-            }
-        }, () => {
-            console.log('this.state is: ', this.state);
-        })
-        console.log(this.state);
-    }
-
-    decreaseQuantity = () => {
-        const { Qty } = this.state;
-        if (Qty <= 1) {
-            alert("Can't be negative")
-            return;
-        }
-
-        this.setState((prevState) => {
-            return {
-                Qty: prevState.Qty - 1
-            }
-        })
-
-        console.log(this.state);
-    }
-
     render() {
-        console.log('this.props:', this.props.product);
-        const { price, title, Qty } = this.props.product;
+        console.log('this.props', this.props);
+        const { price, title, qty } = this.props.product;
+        const { product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props
         return (
             <div className="cart-item">
+                {this.props.jsx}
                 <div className="left-block">
                     <img style={styles.image} />
                 </div>
                 <div className="right-block">
-                    <div style={{ fontSize: 25 }}> {title} </div>
-                    <div style={{ color: "gray" }}> {price} </div>
-                    <div style={{ color: "gray" }} > {Qty}</div>
+                    <div style={{ fontSize: 25 }}>{title}</div>
+                    <div style={{ color: '#777' }}>Rs {price} </div>
+                    <div style={{ color: '#777' }}>Qty: {qty} </div>
                     <div className="cart-item-actions">
                         {/* Buttons */}
                         <img
-                            alt="increase qty"
+                            alt="increase"
                             className="action-icons"
                             src="https://image.flaticon.com/icons/svg/992/992651.svg"
-                            onClick={this.increaseQuantity}>
-                        </img>
-
+                            onClick={() => onIncreaseQuantity(product)}
+                        />
                         <img
-                            alt="decrease qty"
+                            alt="decrease"
                             className="action-icons"
-                            src="https://image.flaticon.com/icons/svg/1828/1828906.svg"
-                            onClick={this.decreaseQuantity}>
-                        </img>
-
+                            src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
+                            onClick={() => onDecreaseQuantity(product)}
+                        />
                         <img
                             alt="delete"
                             className="action-icons"
-                            src="https://image.flaticon.com/icons/svg/1214/1214428.svg">
-                        </img>
-
+                            src="https://image.flaticon.com/icons/svg/1214/1214428.svg"
+                            onClick={() => onDeleteProduct(product.id)}
+                        />
                     </div>
-
                 </div>
-            </div >
-        )
+            </div>
+        );
+    }
+}
+
+const styles = {
+    image: {
+        height: 110,
+        width: 110,
+        borderRadius: 4,
+        background: '#ccc'
     }
 }
 
